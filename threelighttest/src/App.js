@@ -13,8 +13,8 @@ extend({ OrbitControls });
 function App() {
     return (
         <Canvas>
-            <Camera position={[0, 0, 300]} />
-            {/* <CameraControls /> */}
+            {/* <Camera position={[0, 0, 300]} /> */}
+            <CameraControls />
             <axesHelper args={[30, 15, 15]} />
             {/* <Light /> */}
             <ambientLight color={'orange'} intensity={1} />
@@ -65,41 +65,41 @@ function App() {
     );
 }
 
-function Camera(props) {
-    const ref = useRef();
-    const { setDefaultCamera } = useThree();
-    // // Make the camera known to the system
-    useEffect(() => setDefaultCamera(ref.current), []);
-    // // Update it every frame
-    // useFrame(() => ref.current.updateMatrixWorld());
-    return <perspectiveCamera ref={ref} {...props} />;
-}
+// function Camera(props) {
+//     const ref = useRef();
+//     const { setDefaultCamera } = useThree();
+//     // // Make the camera known to the system
+//     useEffect(() => setDefaultCamera(ref.current), []);
+//     // // Update it every frame
+//     // useFrame(() => ref.current.updateMatrixWorld());
+//     return <perspectiveCamera ref={ref} {...props} />;
+// }
 
-// const CameraControls = () => {
-//     // Get a reference to the Three.js Camera, and the canvas html element.
-//     // We need these to setup the OrbitControls class.
-//     // https://threejs.org/docs/#examples/en/controls/OrbitControls
+const CameraControls = () => {
+    // Get a reference to the Three.js Camera, and the canvas html element.
+    // We need these to setup the OrbitControls class.
+    // https://threejs.org/docs/#examples/en/controls/OrbitControls
 
-//     const {
-//         camera,
-//         gl: { domElement },
-//     } = useThree();
+    const {
+        camera,
+        gl: { domElement },
+    } = useThree();
 
-//     camera.position.z = 300;
-//     console.log(camera);
-
-//     // Ref to the controls, so that we can update them on every frame with useFrame
-//     const controls = useRef();
-//     useFrame(() => controls.current.update());
-//     return (
-//         <orbitControls
-//             ref={controls}
-//             args={[camera, domElement]}
-//             autoRotate={true}
-//             enableZoom={false}
-//         />
-//     );
-// };
+    // Ref to the controls, so that we can update them on every frame with useFrame
+    const controls = useRef();
+    useFrame(() => controls.current.update());
+    return (
+        <orbitControls
+            ref={controls}
+            args={[camera, domElement]}
+            autoRotate={false}
+            enableZoom={true}
+            enablePan={false}
+            minDistance={100}
+            maxDistance={200}
+        />
+    );
+};
 
 function GroundPlane() {
     return (

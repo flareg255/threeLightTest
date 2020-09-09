@@ -50,8 +50,11 @@ function BoxObj(props) {
             {/* <torusKnotBufferGeometry attach="geometry" args={[10, 1, 10, 10]} /> */}
             <meshStandardMaterial
                 attach="material"
-                color={'#123456'}
-                wireframe={true}
+                color={'orange'}
+                // wireframe={true}
+                emissive={'white'}
+                emissiveIntensity={0.4}
+                metalness={1}
             />
         </mesh>
     );
