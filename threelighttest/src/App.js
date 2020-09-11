@@ -13,67 +13,34 @@ extend({ OrbitControls });
 function App() {
     return (
         <Canvas>
-            {/* <Camera position={[0, 0, 300]} /> */}
-            <CameraControls />
-            <axesHelper args={[30, 15, 15]} />
-            {/* <Light /> */}
-            <ambientLight color={'orange'} intensity={1} />
-            {/* <ambientLightProbe color={'red'} intensity={1} /> */}
-            {/* <directionalLight
-                color={'red'}
-                intensity={0.5}
-                castShadow={true}
-                position={[5, 0, 0]}
-            /> */}
-            {/* <spotLight color={'#0000ff'} intensity={1} /> */}
-            <GroundPlane />
+            <Camera
+                position={[0, 0, 100]}
+                fov={90}
+                aspect={[window.innerWidth / window.innerHeight]}
+                near={3}
+                far={2000}
+            />
+            {/* <CameraControls /> */}
+            {/* <axesHelper args={[30, 15, 15]} /> */}
+            <Light />
+            {/* <GroundPlane />
             <BackDrop />
-            <Box_group />
-            <rectAreaLight
-                width={30}
-                height={30}
-                intensity={10}
-                color={'#ffbdf4'}
-                position={[2, 1, 4]}
-                lookAt={[0, 0, 0]}
-                penumbra={2}
-                castShadow
-            />
-            <rectAreaLight
-                width={30}
-                height={30}
-                intensity={10}
-                color={'#bdefff'}
-                position={[-2, 1, 4]}
-                lookAt={[0, 0, 0]}
-                penumbra={2}
-                castShadow
-            />
-            <rectAreaLight
-                width={30}
-                height={30}
-                intensity={10}
-                color={'#fff'}
-                position={[1, 4, -2]}
-                lookAt={[0, 0, 0]}
-                penumbra={2}
-                castShadow
-            />
+            <Box_group /> */}
 
             <BoxObj position={[0, 0, 0]} />
         </Canvas>
     );
 }
 
-// function Camera(props) {
-//     const ref = useRef();
-//     const { setDefaultCamera } = useThree();
-//     // // Make the camera known to the system
-//     useEffect(() => setDefaultCamera(ref.current), []);
-//     // // Update it every frame
-//     // useFrame(() => ref.current.updateMatrixWorld());
-//     return <perspectiveCamera ref={ref} {...props} />;
-// }
+function Camera(props) {
+    const ref = useRef();
+    const { setDefaultCamera } = useThree();
+    // // Make the camera known to the system
+    useEffect(() => setDefaultCamera(ref.current), []);
+    // // Update it every frame
+    // useFrame(() => ref.current.updateMatrixWorld());
+    return <perspectiveCamera ref={ref} {...props} />;
+}
 
 const CameraControls = () => {
     // Get a reference to the Three.js Camera, and the canvas html element.
@@ -95,6 +62,7 @@ const CameraControls = () => {
             autoRotate={false}
             enableZoom={true}
             enablePan={false}
+            enableRotate={false}
             minDistance={100}
             maxDistance={200}
         />

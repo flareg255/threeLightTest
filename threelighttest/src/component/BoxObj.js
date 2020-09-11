@@ -1,11 +1,14 @@
 import React, { useRef, useState } from 'react';
 import { useFrame } from 'react-three-fiber';
+import * as THREE from 'three/src/Three';
 
 import _ from 'lodash';
 
 function BoxObj(props) {
     // This reference will give us direct access to the mesh
     const mesh = useRef();
+    const ref = useRef();
+    console.log(ref);
 
     // Set up state for the hovered and active state
     // const [hovered, setHover] = useState(false)
@@ -37,7 +40,7 @@ function BoxObj(props) {
             // onPointerOut={(e) => setHover(false)}
             // castShadow
         >
-            {/* <boxBufferGeometry attach="geometry" args={[1, 1, 1]} /> */}
+            {/* <boxBufferGeometry attach="geometry" args={[30, 30, 30]} /> */}
             {/* <circleBufferGeometry attach="geometry" args={[10, 40]} /> */}
             {/* <ringBufferGeometry attach="geometry" args={[10, 2, 50]} /> */}
             <sphereBufferGeometry attach="geometry" args={[30, 30, 30]} />
@@ -48,14 +51,36 @@ function BoxObj(props) {
             {/* <icosahedronBufferGeometry attach="geometry" args={[2]} /> */}
             {/* <torusBufferGeometry attach="geometry" args={[10, 20, 40, 40]} /> */}
             {/* <torusKnotBufferGeometry attach="geometry" args={[10, 1, 10, 10]} /> */}
-            <meshStandardMaterial
+            {/* <meshStandardMaterial
+                ref={ref}
+                attach="material"
+                color={'#7fc5f9'}
+                // wireframe={true}
+                emissive={'#25673d'}
+                emissiveIntensity={0.6}
+                metalness={0}
+                // metalness={1}
+                roughness={0.1}
+            /> */}
+            <meshPhongMaterial
+                ref={ref}
                 attach="material"
                 color={'orange'}
                 // wireframe={true}
                 emissive={'white'}
-                emissiveIntensity={0.4}
-                metalness={1}
+                emissiveIntensity={0.6}
+                shininess={100}
+                specular={'blue'}
             />
+            {/* <meshLambertMaterial
+                ref={ref}
+                attach="material"
+                color={'orange'}
+                side={THREE.DoubleSide}
+                // wireframe={true}
+                emissive={'white'}
+                emissiveIntensity={0.6}
+            /> */}
         </mesh>
     );
 }
